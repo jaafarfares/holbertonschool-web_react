@@ -17,6 +17,30 @@ interface Teacher {
     return `${firstName[0]} ${lastName}`;
   }
 
-  interface printTeacherFunction {
-    (firstName: string, lastName: string): string;
+  interface Student {
+    firstName: string;
+    lastName: string;
   }
+  
+  interface StudentClassInterface {
+    new(firstName: string, lastName: string): StudentClass;
+  }
+  
+class StudentClass implements Student {
+  public firstName: string; 
+  public lastName: string;
+
+
+  public constructor(firstName: string, lastName: string)
+  {
+this.firstName = firstName;
+this.lastName = lastName;
+
+  }
+  public  workOnHomework(): string {
+    return "Currently working";
+  }
+  public displayName(): string {
+    return this.firstName;
+  }
+ }
