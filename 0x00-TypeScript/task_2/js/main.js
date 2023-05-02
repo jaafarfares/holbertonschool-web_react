@@ -1,3 +1,4 @@
+/** Typescript */
 var Director = /** @class */ (function () {
     function Director() {
     }
@@ -34,9 +35,15 @@ function createEmployee(salary) {
         return new Director();
     }
 }
-console.log(createEmployee(200));
-// Output: Teacher
-console.log(createEmployee(1000));
-// Output: Director
-console.log(createEmployee("$500"));
-// Output: Director
+function isDirector(employee) {
+    if (employee instanceof Director) {
+        return true;
+    }
+    return false;
+}
+function executeWork(employee) {
+    if (isDirector(employee)) {
+        return employee.workDirectorTasks();
+    }
+    return employee.workTeacherTasks();
+}
