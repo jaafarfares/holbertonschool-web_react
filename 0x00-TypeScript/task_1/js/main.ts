@@ -1,3 +1,4 @@
+/** interface */
 interface Teacher {
     firstName: string
     lastName: string
@@ -8,3 +9,6 @@ interface Teacher {
   }
   
 
+  interface Directors extends Teacher {
+    numberOfReports: number
+  }
