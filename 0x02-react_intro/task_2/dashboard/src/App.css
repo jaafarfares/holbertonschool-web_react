@@ -3,7 +3,7 @@
   display: flex;
   justify-content: baseline;
   align-items: center;
-  height: 50vh;
+  height: auto;
   color: red;
   border-bottom: 4px solid red;
 }
