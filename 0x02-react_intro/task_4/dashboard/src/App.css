@@ -1,0 +1,26 @@
+/* Center the container element */
+.App-header {
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  height: auto;
+  color: red;
+  border-bottom: 4px solid red;
+}
+
+/* Position the logo */
+.App-body {
+  position: fixed;
+  left: 40px; 
+  margin: 10px;
+  padding: 0;
+}
+.App-footer {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  border-top: 4px solid red;
+
+}

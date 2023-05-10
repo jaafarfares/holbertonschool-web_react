@@ -1,0 +1,17 @@
+.Notifications ul li[data-priority="default"] {
+    color: blue;
+  }
+  
+  .Notifications ul li[data-priority="urgent"] {
+    color: red;
+  }
+  
+  .Notifications ul li[data-priority="high"] {
+    color: black;
+  }
+  
+
+  .root-notifications {
+    margin: 10px;
+    padding : 10px;
+  }
