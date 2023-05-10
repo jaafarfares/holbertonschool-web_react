@@ -1,4 +1,11 @@
-import './style.css';
-import logo from './logo.jpg';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './index.css';
 
-console.log('Hello, world!');
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
