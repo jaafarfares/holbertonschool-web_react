@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Login from '../Login';
-import Footer from '../';
-import Header from './Header';
 import Notifications from '../Notifications/Notifications.js';
+import Header from '../Header/Header.js';
+import Footer from '../Footer/Footer.js';
+import Login from '../Login/Login.js';
 
-function App() {
-  return (
-    <Fragment>
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
       <Notifications />
-      <div className="App">
-        <Header />
-        <Login />
-        <Footer />
-      </div>
-    </Fragment>
-  );
+        <div className='App'>
+          <Header />
+        </div>
+        <div className='App-body'>
+          <Login />
+        </div>
+        <div className='App-footer'>
+          <Footer />
+        </div>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
