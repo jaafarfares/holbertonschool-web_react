@@ -1,13 +1,3 @@
-import React, { Component, Fragment } from 'react';w
-import './App.css';
-import Header from '../Header/Header.js';
-import Login from '../Login/Login.js';
-import Footer from '../Footer/Footer.js';
-import Notifications from '../Notifications/Notifications.js';
-import CourseList from '../CourseList/CourseList';
-import PropTypes from 'prop-types'; 
-import { getLatestNotification } from '../utils/utils';
-
 export default class App extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool,

@@ -1,29 +1,44 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { expect } from 'chai';
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
 import App from './App';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import Notifications from '../Notifications/Notifications';
+import CourseList from '../CourseList/CourseList';
 
-describe('App', () => {
-  it('renders without crashing', () => {
-    render(<App />);
+configure({ adapter: new Adapter() });
+
+describe("Testing the <App /> Component", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<App />);
   });
 
-  it('renders the Notifications component', () => {
-    const { getByTestId } = render(<App />);
-    expect(getByTestId('notifications')).toBeInTheDocument();
+  it("<App /> is rendered without crashing", () => {
+    expect(wrapper.exists()).to.equal(true);
   });
 
-  it('renders the Header component', () => {
-    const { getByTestId } = render(<App />);
-    expect(getByTestId('header')).toBeInTheDocument();
+  it("<App /> contains the <Footer /> Component", () => {
+    expect(wrapper.find(Footer)).to.have.lengthOf(1);
   });
 
-  it('renders the Login component', () => {
-    const { getByTestId } = render(<App />);
-    expect(getByTestId('login')).toBeInTheDocument();
+  it("<App /> contains the <Header /> Component", () => {
+    expect(wrapper.find(Header)).to.have.lengthOf(1);
   });
 
-  it('renders the Footer component', () => {
-    const { getByTestId } = render(<App />);
-    expect(getByTestId('footer')).toBeInTheDocument();
+  it("<App /> contains <CourseList /> when isLoggedIn is true", () => {
+    wrapper.setProps({ isLoggedIn: true });
+    expect(wrapper.find(CourseList)).to.have.lengthOf(1);
+    expect(wrapper.find(Login)).to.have.lengthOf(0);
+  });
+
+  it("<App /> contains <Login /> when isLoggedIn is false", () => {
+    wrapper.setProps({ isLoggedIn: false });
+    expect(wrapper.find(Login)).to.have.lengthOf(1);
+    expect(wrapper.find(CourseList)).to.have.lengthOf(0);
   });
 });
