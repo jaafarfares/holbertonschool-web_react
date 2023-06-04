@@ -4,35 +4,28 @@ import Notifications from '../Notifications/Notifications.js';
 import Header from '../Header/Header.js';
 import Footer from '../Footer/Footer.js';
 import Login from '../Login/Login.js';
-import CourseList from '../CourseList/CourseList.js';
 
 class App extends Component {
   render() {
-    let {
-      isLoggedIn,
-    } = this.props;
-
-    let i = 0;
-
-    let listNotifications = [
+    const listNotifications = [
       {
-        id: i++,
+        id: 1,
         type: "default",
         value: "New course available",
       },
       {
-        id: i++,
+        id: 2,
         type: "urgent",
         value: "New resume available",
       },
       {
-        id: i++,
+        id: 3,
         type: "urgent",
         html: { __html: getLatestNotification() },
       }
     ];
 
-    let listCourses = [
+    const listCourses = [
       {
         id: 1,
         name: "ES6",
@@ -50,21 +43,18 @@ class App extends Component {
       },
     ];
 
+    const isLoggedIn = this.props.isLoggedIn;
+
     return (
       <Fragment>
-        <div className="App">
-          <div className="upperside">
-            <Notifications listNotifications={listNotifications} />
-            <Header />
-          </div>
-          {
-            isLoggedIn === false &&
-            <Login />
-          }
-          {
-            isLoggedIn === true &&
-            <CourseList listCourses={listCourses} />
-          }
+        <Notifications listNotifications={listNotifications} />
+        <div className='App'>
+          <Header />
+        </div>
+        <div className='App-body'>
+          {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+        </div>
+        <div className='App-footer'>
           <Footer />
         </div>
       </Fragment>
