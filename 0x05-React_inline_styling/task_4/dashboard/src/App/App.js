@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
+import './App.css';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
