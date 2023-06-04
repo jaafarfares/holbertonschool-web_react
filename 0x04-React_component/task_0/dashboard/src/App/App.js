@@ -8,8 +8,8 @@ import Login from '../Login/Login.js';
 class App extends Component {
   render() {
     return (
-      <Fragment>
-      <Notifications />
+      <React.Fragment>
+        <Notifications />
         <div className='App'>
           <Header />
         </div>
@@ -19,7 +19,7 @@ class App extends Component {
         <div className='App-footer'>
           <Footer />
         </div>
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
