@@ -1,4 +1,12 @@
 import $ from 'jquery';
+import _ from 'lodash';
+
+let count = 0;
+
+function incrementt() {
+	count += 1;
+	return count;
+}
 
 $(function() {
 	$('body').append('<p>Holberton Dashboard</p>');
@@ -19,6 +27,6 @@ function updateCounter(count) {
        countDisplay.innerHTML = `${count} clicks on the button`;
     });
 
-    const debouncedUpdateCounter = debounce(updateCounter, 500);
+    const debouncedUpdateCounter = debounce(incrementt, 500);
     button.addEventListener("click", debouncedUpdateCounter);
   };
