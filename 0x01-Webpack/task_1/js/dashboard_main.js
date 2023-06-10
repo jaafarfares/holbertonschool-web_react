@@ -14,14 +14,11 @@ $(function() {
 	$('body').append('<button id="myButton">Click here to get started</button>');
 	$('body').append('<p id="count"></p>');
 	$('body').append('<p>Copyright - Holberton School</p>');
-     updateCounter();
-});
 
 
-function updateCounter() {
     let debouncedUpdateCounter = _.debounce(() => {
 		let count = incrementt();
 		$('#count').text(`${count} clicks on the button`);
 	});
 	$('button').on('click', debouncedUpdateCounter);
-};
+});
