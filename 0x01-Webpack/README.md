@@ -4,7 +4,7 @@
 
 ##### Webpack is a popular open-source module bundler for JavaScript applications. It is designed to simplify the process of building complex web applications by bundling various static assets such as JavaScript, CSS, images, and more into bundles that can be easily served to the browser. Webpack analyzes the dependencies between different modules and generates optimized bundles for efficient delivery to the client-side.
 
-### Webpack is highly useful in modern web development for several reasons:
+##### Webpack is highly useful in modern web development for several reasons:
 
  * Module Bundling: Webpack allows you to organize your codebase into modular chunks, making it easier to manage and maintain complex projects.
 
@@ -25,7 +25,6 @@
 * [Webpack documentation](https://webpack.js.org/concepts/)
 * [Webpack beginner guide](https://www.sitepoint.com/webpack-beginner-guide/)
 * [npm-package.json](https://docs.npmjs.com/cli/v9/configuring-npm/package-json)
-* 
 
 ### Learning Objectives
 
