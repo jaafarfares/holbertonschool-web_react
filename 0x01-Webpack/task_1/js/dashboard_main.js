@@ -15,9 +15,6 @@ $(function() {
 	$('body').append("<p id='count'></p>");
 	$('body').append('<p>Copyright - Holberton School</p>');
 
-     
-
-
 	let debouncedUpdateCounter = _.debounce(() => {
 		let count = updateCounter();
 		$('#count').text(`${count} clicks on the button`);

@@ -4,6 +4,7 @@
   "description": "",
   "main": "dashboard_main.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
   "keywords": [],
@@ -14,7 +15,7 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "jquery": "^3.5.1",
-    "lodash": "^4.17.20"
+    "jquery": "^3.7.0",
+    "lodash": "^4.17.21"
   }
 }
