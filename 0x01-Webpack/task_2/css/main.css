@@ -7,9 +7,9 @@ button {
     right: 0;
     font-weight: bold;
   }
-  
+
   #logo {
     width: 200px;
     height: 200px;
-    background-image: url('task_2/assets/holberton-logo.jpg');
+    background-image: url('assets/holberton-logo.jpg');
   }
