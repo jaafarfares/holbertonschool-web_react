@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 let count = 0;
 
-function incrementt() {
+function updateCounter() {
 	count += 1;
 	return count;
 }
@@ -14,11 +14,14 @@ $(function() {
 	$('body').append('<button id="myButton">Click here to get started</button>');
 	$('body').append('<p id="count"></p>');
 	$('body').append('<p>Copyright - Holberton School</p>');
+     func();
+});
 
 
+function func() {
     let debouncedUpdateCounter = _.debounce(() => {
-		let count = incrementt();
+		let count = updateCounter();
 		$('#count').text(`${count} clicks on the button`);
 	});
 	$('button').on('click', debouncedUpdateCounter);
-});
+};
