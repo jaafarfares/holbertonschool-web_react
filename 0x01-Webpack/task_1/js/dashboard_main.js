@@ -18,15 +18,10 @@ $(function() {
 });
 
 
-function updateCounter(count) {
-    var count = 0;
-    var button = document.getElementById("myButton");
-    var countDisplay = document.getElementById("count");
-    button.addEventListener("click", function(){
-       count++;
-       countDisplay.innerHTML = `${count} clicks on the button`;
-    });
-
-    const debouncedUpdateCounter = debounce(incrementt, 500);
-    button.addEventListener("click", debouncedUpdateCounter);
-  };
+function updateCounter() {
+    let debouncedUpdateCounter = _.debounce(() => {
+		let count = incrementt();
+		$('#count').text(`${count} clicks on the button`);
+	});
+	$('button').on('click', debouncedUpdateCounter);
+};
