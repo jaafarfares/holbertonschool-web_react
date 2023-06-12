@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
 
-export function getImmutableObject(object) {
+export default function getImmutableObject(object) {
   return Immutable.Map(object);
 }
