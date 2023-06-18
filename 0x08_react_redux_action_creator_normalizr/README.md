@@ -1,6 +1,6 @@
 # 0x08. React Redux action creator+normalizr
 
-![Screenshot](snake_game1.png)
+![Screenshot](4963c748e30236ee05f2.jpg)
 
 ### working with a React application and implementing various tasks related to state management, normalization, filtering, and creating actions using Redux and Redux Thunk.
 
