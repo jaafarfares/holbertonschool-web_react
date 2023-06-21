@@ -1,11 +1,13 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
+import Enzyme from 'enzyme';
+
 import Adapter from 'enzyme-adapter-react-16';
-import { mount, configure } from 'enzyme';
+
 import App from './App';
 
-configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Testing the <App /> Component', () => {
   let wrapper;
@@ -13,7 +15,7 @@ describe('Testing the <App /> Component', () => {
 
   beforeEach(() => {
     logOutSpy = sinon.spy();
-    wrapper = mount(<App logOut={logOutSpy} />);
+    wrapper = shallow(<App logOut={logOutSpy} />);
   });
 
   afterEach(() => {
