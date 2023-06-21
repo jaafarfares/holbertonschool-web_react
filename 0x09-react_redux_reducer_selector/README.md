@@ -2,6 +2,7 @@
 
 ![Screenshot](img.jpg)
 
+### Resources
 
 * [Reducers](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers)
 * [Selectors](https://redux.js.org/introduction/learning-resources#selectors)
