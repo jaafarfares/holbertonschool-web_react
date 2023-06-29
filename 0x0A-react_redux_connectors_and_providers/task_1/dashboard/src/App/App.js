@@ -37,39 +37,6 @@ const styles = StyleSheet.create({
 });
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayDrawer: false,
-      user: user,
-      logOut: this.logOut,
-      listNotifications: [
-        { id: 1, type: 'default', value: 'New course available' },
-        { id: 2, type: 'urgent', value: 'New resume available' },
-        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
-      ],
-    };
-  }
-
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
-
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-
-  handleClick(event) {
-    if (event.keyCode === 72 && event.ctrlKey) {
-      alert('Logging you out');
-      this.state.logOut();
-    }
-  }
-
-  logIn(email, password) {
-    this.setState({ user: { email: email, password: password, isLoggedIn: true } });
-  }
-
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
   }
@@ -91,17 +58,8 @@ class App extends Component {
   }
 
   render() {
-    
-    const { user, logOut, listNotifications } = this.state;
+    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, listNotifications } = this.props;
 
-    const {
-      isLoggedIn,
-      displayDrawer,
-      displayNotificationDrawer,
-      hideNotificationDrawer,
-    } = this.props;
-
-    const value = { user, logOut };
 
     let listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -146,6 +104,27 @@ class App extends Component {
     );
   }
 }
+App.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  displayDrawer: PropTypes.bool.isRequired,
+  displayNotificationDrawer: PropTypes.func.isRequired,
+  hideNotificationDrawer: PropTypes.func.isRequired,
+  listNotifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+      html: PropTypes.object,
+    })
+  ).isRequired,
+};
+
+App.defaultProps = {
+  isLoggedIn: false,
+  displayDrawer: false,
+  listNotifications: [],
+};
+
 
 export const mapStateToProps = (state) => {
   return {
