@@ -15,6 +15,7 @@ import AppContext from './AppContext.js';
 import {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  loginRequest,
 } from '../actions/uiActionCreators';
 
 const styles = StyleSheet.create({
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 class App extends Component {
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
@@ -52,14 +52,11 @@ class App extends Component {
     }
   };
 
-  markNotificationAsRead(id) {
-    this.setState({
-      listNotifications: this.state.listNotifications.filter((notification) => {
-        return notification.id !== id;
-      }),
-    });
-  }
+  markNotificationAsRead = (id) => {
+    // Implement your logic to mark the notification as read
+  };
 
+  
   render() {
     const {
       logOut,
@@ -68,6 +65,7 @@ class App extends Component {
       displayNotificationDrawer,
       hideNotificationDrawer,
       listNotifications,
+      login,
     } = this.props;
 
     let listCourses = [
@@ -92,7 +90,7 @@ class App extends Component {
 
           {!user.isLoggedIn ? (
             <BodySectionWithMarginBottom title="Log in to continue">
-              <Login />
+              <Login login={login} />
             </BodySectionWithMarginBottom>
           ) : (
             <BodySectionWithMarginBottom title="Course list">
@@ -118,6 +116,7 @@ class App extends Component {
 }
 
 App.propTypes = {
+  logOut: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isLoggedIn: PropTypes.bool.isRequired,
   }).isRequired,
@@ -132,8 +131,7 @@ App.propTypes = {
       html: PropTypes.object,
     })
   ).isRequired,
-  loginRequest: PropTypes.func.isRequired,
-  logoutSuccess: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -149,7 +147,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
-  loginRequest,
-  logoutSuccess,
+  login: loginRequest,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
