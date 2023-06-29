@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
+
 class App extends Component {
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
@@ -51,9 +52,13 @@ class App extends Component {
     }
   };
 
-  markNotificationAsRead = (id) => {
-    // Implement your logic to mark the notification as read
-  };
+  markNotificationAsRead(id) {
+    this.setState({
+      listNotifications: this.state.listNotifications.filter((notification) => {
+        return notification.id !== id;
+      }),
+    });
+  }
 
   render() {
     const {
@@ -113,7 +118,6 @@ class App extends Component {
 }
 
 App.propTypes = {
-  logOut: PropTypes.func.isRequired,
   user: PropTypes.shape({
     isLoggedIn: PropTypes.bool.isRequired,
   }).isRequired,
@@ -128,7 +132,10 @@ App.propTypes = {
       html: PropTypes.object,
     })
   ).isRequired,
+  loginRequest: PropTypes.func.isRequired,
+  logoutSuccess: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = (state) => {
   return {
     user: {
@@ -142,6 +149,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  loginRequest,
+  logoutSuccess,
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(App);

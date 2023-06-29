@@ -50,10 +50,13 @@ class App extends Component {
       this.props.logOut();
     }
   };
-
-  markNotificationAsRead = (id) => {
-    // Implement your logic to mark the notification as read
-  };
+  markNotificationAsRead(id) {
+    this.setState({
+      listNotifications: this.state.listNotifications.filter((notification) => {
+        return notification.id !== id;
+      }),
+    });
+  }
 
   render() {
     const {
