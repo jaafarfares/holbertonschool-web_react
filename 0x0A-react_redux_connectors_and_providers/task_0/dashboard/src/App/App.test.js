@@ -38,4 +38,17 @@ describe('Testing the <App /> Component', () => {
     expect(window.alert.calledOnce).to.equal(true);
     expect(window.alert.calledWith('Logging you out')).to.equal(true);
   });
+  it('should return the right object when passing the state', () => {
+    const state = fromJS({
+      isUserLoggedIn: true,
+    });
+
+    const expectedProps = {
+      isLoggedIn: true,
+    };
+
+    const props = mapStateToProps(state);
+
+    expect(props).to.deep.equal(expectedProps);
+  });
 });
