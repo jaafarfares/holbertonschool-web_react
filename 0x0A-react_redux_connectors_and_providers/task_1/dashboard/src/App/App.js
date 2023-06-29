@@ -12,6 +12,11 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 import { connect } from 'react-redux';
 import { user, logOut } from './AppContext.js';
+import {
+	displayNotificationDrawer,
+	hideNotificationDrawer,
+  } from "../actions/uiActionCreators";
+
 
 const styles = StyleSheet.create({
   body: {
@@ -87,9 +92,15 @@ class App extends Component {
 
   render() {
     
-    let { isLoggedIn } = this.props;
+    const { user, logOut, listNotifications } = this.state;
 
-    const { displayDrawer, user, logOut, listNotifications } = this.state;
+    const {
+      isLoggedIn,
+      displayDrawer,
+      displayNotificationDrawer,
+      hideNotificationDrawer,
+    } = this.props;
+
     const value = { user, logOut };
 
     let listCourses = [
@@ -103,7 +114,10 @@ class App extends Component {
       <Fragment>
         <div className={css(styles.body)}>
           <div className={css(styles.headerRow)}>
-            <Notifications listNotifications={listNotifications} />
+            <Notifications listNotifications={listNotifications} displayDrawer={displayDrawer}
+			handleDisplayDrawer={displayNotificationDrawer}
+			handleHideDrawer={hideNotificationDrawer}
+			markNotificationAsRead={this.markNotificationAsRead} />
             <Header />
           </div>
 
@@ -140,5 +154,9 @@ export const mapStateToProps = (state) => {
 
   };
 };
+const mapDispatchToProps = {
+	displayNotificationDrawer,
+	hideNotificationDrawer,
+  };
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
