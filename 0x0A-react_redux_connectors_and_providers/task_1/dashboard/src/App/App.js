@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import './App.css';
@@ -11,12 +11,11 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import { connect } from 'react-redux';
-import { user, logOut } from './AppContext.js';
+import AppContext from './AppContext.js';
 import {
-	displayNotificationDrawer,
-	hideNotificationDrawer,
-  } from "../actions/uiActionCreators";
-
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+} from '../actions/uiActionCreators';
 
 const styles = StyleSheet.create({
   body: {
@@ -52,39 +51,45 @@ class App extends Component {
     }
   };
 
-  markNotificationAsRead(id) {
-    const newListNotifications = this.state.listNotifications.filter((item) => item.id !== id);
-    this.setState({ listNotifications: newListNotifications });
-  }
+  markNotificationAsRead = (id) => {
+    // Implement your logic to mark the notification as read
+  };
 
   render() {
-    const { isLoggedIn, displayDrawer, displayNotificationDrawer, hideNotificationDrawer, listNotifications } = this.props;
-
+    const {
+      logOut,
+      user,
+      displayDrawer,
+      displayNotificationDrawer,
+      hideNotificationDrawer,
+      listNotifications,
+    } = this.props;
 
     let listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
       { id: 2, name: 'Webpack', credit: 20 },
       { id: 3, name: 'React', credit: 40 },
     ];
-    
 
     return (
-      <Fragment>
+      <AppContext.Provider value={{ user, logOut }}>
+        <Notifications
+          listNotifications={listNotifications}
+          displayDrawer={displayDrawer}
+          handleDisplayDrawer={displayNotificationDrawer}
+          handleHideDrawer={hideNotificationDrawer}
+          markNotificationAsRead={this.markNotificationAsRead}
+        />
         <div className={css(styles.body)}>
           <div className={css(styles.headerRow)}>
-            <Notifications listNotifications={listNotifications} displayDrawer={displayDrawer}
-			handleDisplayDrawer={displayNotificationDrawer}
-			handleHideDrawer={hideNotificationDrawer}
-			markNotificationAsRead={this.markNotificationAsRead} />
             <Header />
           </div>
 
-          {isLoggedIn === false && (
+          {!user.isLoggedIn ? (
             <BodySectionWithMarginBottom title="Log in to continue">
               <Login />
             </BodySectionWithMarginBottom>
-          )}
-          {isLoggedIn === true && (
+          ) : (
             <BodySectionWithMarginBottom title="Course list">
               <CourseList listCourses={listCourses} />
             </BodySectionWithMarginBottom>
@@ -95,17 +100,23 @@ class App extends Component {
 
         <BodySection title="News from the School">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi
-            repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga
-            praesentium optio, eaque rerum! Provident similique accusantium nemo autem.
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum."
           </p>
         </BodySection>
-      </Fragment>
+      </AppContext.Provider>
     );
   }
 }
+
 App.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  logOut: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    isLoggedIn: PropTypes.bool.isRequired,
+  }).isRequired,
   displayDrawer: PropTypes.bool.isRequired,
   displayNotificationDrawer: PropTypes.func.isRequired,
   hideNotificationDrawer: PropTypes.func.isRequired,
@@ -118,24 +129,19 @@ App.propTypes = {
     })
   ).isRequired,
 };
-
-App.defaultProps = {
-  isLoggedIn: false,
-  displayDrawer: false,
-  listNotifications: [],
-};
-
-
-export const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.get('isUserLoggedIn'),
+    user: {
+      isLoggedIn: state.get('isUserLoggedIn'),
+    },
     displayDrawer: state.get('isNotificationDrawerVisible'),
-
+    listNotifications: state.get('notifications')?.toJS() || [],
   };
 };
+
 const mapDispatchToProps = {
-	displayNotificationDrawer,
-	hideNotificationDrawer,
-  };
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
