@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 import HolbertonLogo from '../assets/holberton_logo.jpg';
-import { logout } from '../redux/actions'; // Assuming the logout action creator is implemented in '../redux/actions'
+import { logout } from '../redux/actions'; 
 
 const styles = StyleSheet.create({
   header: {
@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user // Assuming 'user' is the property in the Redux state that holds the user information
+    user: state.user
   };
 };
 
 function Header({ user, logout }) {
   const handleLogout = () => {
-    logout(); // Dispatch the logout action creator when the user clicks on the link
+    logout(); 
   };
 
   return (

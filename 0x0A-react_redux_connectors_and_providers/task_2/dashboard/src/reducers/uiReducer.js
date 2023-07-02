@@ -10,7 +10,7 @@ import {
 export const initialState = Map({
   isNotificationDrawerVisible: false,
   isUserLoggedIn: false,
-  user: '',
+  user: null, 
 });
 
 const uiReducer = (state = initialState, action) => {
@@ -22,11 +22,13 @@ const uiReducer = (state = initialState, action) => {
       return state.set('isNotificationDrawerVisible', false);
 
     case LOGIN_SUCCESS:
-      return state.set('isUserLoggedIn', true);
+      return state.set('isUserLoggedIn', true)
+                  .set('user', action.user); 
 
     case LOGIN_FAILURE:
     case LOGOUT:
-      return state.set('isUserLoggedIn', false);
+      return state.set('isUserLoggedIn', false)
+                  .set('user', null);
 
     default:
       return state;
